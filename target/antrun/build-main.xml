@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <junitreport todir="target/surefire-reports">
+    <fileset dir="target/surefire-reports">
+      <include name="**/*.xml"/>
+    </fileset>
+    <report todir="target/surefire-reports" format="noframes"/>
+  </junitreport>
+</target>
+</project>

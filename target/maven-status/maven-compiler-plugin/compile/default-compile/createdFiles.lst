@@ -1,0 +1,12 @@
+org/lena/noerenberg/repository/ClientRepository.class
+org/lena/noerenberg/config/FF4jConfig.class
+org/lena/noerenberg/controller/TestController.class
+org/lena/noerenberg/model/Client.class
+org/lena/noerenberg/config/FF4jWebConsoleConfiguration.class
+org/lena/noerenberg/config/SpringWebConfig.class
+org/lena/noerenberg/controller/HomeController.class
+org/lena/noerenberg/Application.class
+org/lena/noerenberg/ProcessBuilderExample1.class
+org/lena/noerenberg/repository/TestRepository.class
+org/lena/noerenberg/controller/ClientsController.class
+org/lena/noerenberg/model/Test.class
