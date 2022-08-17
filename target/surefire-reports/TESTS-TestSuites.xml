@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" id="0" name="PlayNumbersTest" package="org.lena.noerenberg.tasks.a4" skipped="0" tests="1" time="0.115" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd">
+  <testsuite errors="0" failures="0" id="0" name="PlayNumbersTest" package="org.lena.noerenberg.tasks.a4" skipped="0" tests="1" time="0.035" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd">
       <properties>
           <property name="java.specification.version" value="18" />
 
@@ -24,7 +24,7 @@
 
           <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/18.0.1/libexec/openjdk.jdk/Contents/Home/lib" />
 
-          <property name="sun.java.command" value="/Users/lena/Desktop/masterthesis/target/surefire/surefirebooter8233116648090881306.jar /Users/lena/Desktop/masterthesis/target/surefire 2022-08-09T08-53-29_052-jvmRun1 surefire17087344180520959616tmp surefire_015460590566823949937tmp" />
+          <property name="sun.java.command" value="/Users/lena/Desktop/masterthesis/target/surefire/surefirebooter4725593754309639626.jar /Users/lena/Desktop/masterthesis/target/surefire 2022-08-17T10-05-48_448-jvmRun1 surefire8398811639444465868tmp surefire_07207382726094034469tmp" />
 
           <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
 
@@ -58,7 +58,7 @@
 
           <property name="apple.awt.application.name" value="ForkedBooter" />
 
-          <property name="surefire.real.class.path" value="/Users/lena/Desktop/masterthesis/target/surefire/surefirebooter8233116648090881306.jar" />
+          <property name="surefire.real.class.path" value="/Users/lena/Desktop/masterthesis/target/surefire/surefirebooter4725593754309639626.jar" />
 
           <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
 
@@ -112,7 +112,7 @@
 
       </properties>
 
-      <testcase classname="org.lena.noerenberg.tasks.a4.PlayNumbersTest" name="test100_sum" time="0.071" />
+      <testcase classname="org.lena.noerenberg.tasks.a4.PlayNumbersTest" name="test100_sum" time="0.029" />
 
   </testsuite>
 </testsuites>
