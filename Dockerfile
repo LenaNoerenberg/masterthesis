@@ -7,19 +7,35 @@
 
 FROM maven:3.6.3-openjdk-11 AS MAVEN_BUILD
 MAINTAINER Lena Nörenberg
-COPY pom.xml /build/
-COPY src /build/src/
-COPY target /build/target/
-WORKDIR /build/
-RUN mvn package
+
 
 
 # Copy source files and junit tests from students /src/main/java/tasks into application/build/src/main/java
 # ENV git_url = $git_url
 RUN git clone https://l.noerenberg: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@github.com/s80984/se-demo
-RUN mkdir
-RUN cp se-demo/src/main/java/master/sedemo/tasks /build/src/main/java/org/lena/noerenberg/
-RUN cp /se-demo/src/test/java/master/sedemo/tasks /build/src/test/java/org/lena/noerenberg/ ./
+RUN cp ./se-demo/src/main/java/master/sedemo/tasks/* src/main/java/master/sedemo/tasks
+RUN git clone https://s80984:BoYhomK7Puabags2TsMY@gitlab.beuth-hochschule.de/s80984/testrepository
+RUN cp testrepository/src/test/java/master/sedemo/tasks/Customer* src/test/java/master/sedemo/tasks
+RUN mvn package
+COPY pom.xml /build/
+COPY src /build/src/
+WORKDIR /build/
+COPY target /build/target/
+ENV JAR_FILE=/target/*.jar
+COPY target/*.jar /build/target/app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
+
+
+
+#FROM adoptopenjdk/openjdk18:alpine-jre as LAYERS_BUILD
+#ARG JAR_FILE=/target/masterthesis-1.8.11.jar
+#COPY --from=MAVEN_BUILD ${JAR_FILE} application.jar
+#RUN java -Djarmode=layertools -jar application.jar extract
+
+#CMD [ "mvn" , "spring-boot:run" ]
+#ARG JAR_FILE=/build/target/*.jar
+#COPY ${JAR_FILE} application.jar
+#ENTRYPOINT ["java", "-jar", "/application.jar"]
 
 
 ####################################################################
@@ -30,12 +46,12 @@ RUN cp /se-demo/src/test/java/master/sedemo/tasks /build/src/test/java/org/lena/
 # of intermediate layers and leveraging on Docker Cache.
 ####################################################################
 
-FROM adoptopenjdk:11-jre-hotspot as LAYERS_BUILD
-WORKDIR application
-ARG JAR_FILE=/build/target/*.jar
-COPY --from=MAVEN_BUILD ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
- 
+#FROM adoptopenjdk:11-jre-hotspot as LAYERS_BUILD
+#WORKDIR application
+#COPY --from=MAVEN_BUILD ${JAR_FILE} /application.jar
+##RUN #java -Djarmode=layertools -jar application.jar extract
+#ENTRYPOINT ["java","-jar","/target/masterthesis-1.8.11.jar"]
+
 ####################################################################
 # Stage 3: BUILD IMAGE
 # 
@@ -43,13 +59,15 @@ RUN java -Djarmode=layertools -jar application.jar extract
 # of intermediate layers and leveraging on Docker Cache.
 ####################################################################
 
-FROM adoptopenjdk:11-jre-hotspot
-WORKDIR application
-EXPOSE 8080
-COPY --from=LAYERS_BUILD application/dependencies/ ./
-COPY --from=LAYERS_BUILD application/spring-boot-loader ./
-COPY --from=LAYERS_BUILD application/snapshot-dependencies/ ./
-COPY --from=LAYERS_BUILD application/application/ ./
+#FROM adoptopenjdk:11-jre-hotspot
+##FROM adoptopenjdk/openjdk18:alpine-jre
+#WORKDIR application
+#EXPOSE 8080
+#COPY --from=LAYERS_BUILD application/dependencies/ ./
+#COPY --from=LAYERS_BUILD application/spring-boot-loader ./
+#COPY --from=LAYERS_BUILD application/snapshot-dependencies/ ./
+#COPY --from=LAYERS_BUILD application/application/ ./
 
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+#ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+#
