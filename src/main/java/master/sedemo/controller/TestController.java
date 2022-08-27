@@ -32,8 +32,8 @@ public class TestController {
     public List<Test> getTests(){ return testRepository.findAll(); }
 
 
-    @PostMapping("execute")
-    public ResponseEntity executeTest() throws URISyntaxException {
+    @PostMapping("executeTestLevel1")
+    public ResponseEntity executeTestLevel1() throws URISyntaxException {
         System.out.println("Test in Post");
 //        Test currentTest = testRepository.findById(id).orElseThrow(RuntimeException::new);
         ProcessBuilder processBuilder = new ProcessBuilder();
@@ -44,7 +44,47 @@ public class TestController {
 //        }
 
         // Run this on Windows, cmd, /c = terminate after this run
-        processBuilder.command("bash", "-c", "mvn -Dtest=PlayNumbersTest test");
+        processBuilder.command("bash", "-c", "mvn -Dtest=Customer_100_ConstructorTest test");
+
+        try {
+
+            Process process = processBuilder.start();
+
+            // blocked :(
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            int exitCode = process.waitFor();
+            System.out.println("\nExited with error code : " + exitCode);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("Ping send.");
+
+        return ResponseEntity.ok("currentTest");
+    }
+
+    @PostMapping("executeTestLevel2")
+    public ResponseEntity executeTestLevel2() throws URISyntaxException {
+        System.out.println("Test in Post2");
+//        Test currentTest = testRepository.findById(id).orElseThrow(RuntimeException::new);
+        ProcessBuilder processBuilder = new ProcessBuilder();
+//        if (isWindows) {
+//            processBuilder.command("cmd.exe", "/c", "ping -n 3 google.com");
+//        } else {
+//            processBuilder.command("bash", "-c", "ping -c 3 google.com");
+//        }
+
+        // Run this on Windows, cmd, /c = terminate after this run
+        processBuilder.command("bash", "-c", "mvn -Dtest=Customer_200_SetIdTest test");
 
         try {
 

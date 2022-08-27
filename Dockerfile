@@ -4,26 +4,27 @@
 # Use a docker image with Maven to build the deliverable
 # Build everywhere
 ####################################################################
-
-FROM maven:3.6.3-openjdk-11 AS MAVEN_BUILD
-MAINTAINER Lena Nörenberg
-
-
-
-# Copy source files and junit tests from students /src/main/java/tasks into application/build/src/main/java
-# ENV git_url = $git_url
-RUN git clone https://l.noerenberg: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@github.com/s80984/se-demo
-RUN cp ./se-demo/src/main/java/master/sedemo/tasks/* src/main/java/master/sedemo/tasks
-RUN git clone https://s80984:BoYhomK7Puabags2TsMY@gitlab.beuth-hochschule.de/s80984/testrepository
-RUN cp testrepository/src/test/java/master/sedemo/tasks/Customer* src/test/java/master/sedemo/tasks
-RUN mvn package
-COPY pom.xml /build/
-COPY src /build/src/
-WORKDIR /build/
-COPY target /build/target/
-ENV JAR_FILE=/target/*.jar
-COPY target/*.jar /build/target/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+#
+#FROM maven:3.6.3-openjdk-11 AS MAVEN_BUILD
+#MAINTAINER Lena Nörenberg
+#COPY pom.xml /build/
+#COPY src /build/src/
+#WORKDIR /build/
+#COPY target /build/target/
+#
+#
+## Copy source files and junit tests from students /src/main/java/tasks into application/build/src/main/java
+## ENV git_url = $git_url
+#RUN git clone https://l.noerenberg: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@github.com/s80984/se-demo
+##RUN mkdir /build/src/main/java/master/sedemo/tasks
+#RUN cp ./se-demo/src/main/java/master/sedemo/tasks/* /build/src/main/java/master/sedemo/tasks
+#RUN git clone https://s80984:BoYhomK7Puabags2TsMY@gitlab.beuth-hochschule.de/s80984/testrepository
+##RUN mkdir /build/src/test/java/master/sedemo/tasks
+#RUN cp testrepository/src/test/java/master/sedemo/tasks/Customer* /build/src/test/java/master/sedemo/tasks
+#RUN mvn package
+#ENV JAR_FILE=/build/target/*.jar
+#COPY target/*.jar /build/target/
+#ENTRYPOINT ["java","-jar","app.jar"]
 
 
 
@@ -71,3 +72,22 @@ ENTRYPOINT ["java","-jar","app.jar"]
 
 #ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 #
+
+FROM maven:3.6.3-openjdk-11
+WORKDIR /app
+ADD pom.xml /app
+RUN mvn verify clean --fail-never
+
+# Image layer: with the application
+COPY . /app
+RUN git clone https://l.noerenberg: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@github.com/s80984/se-demo
+#RUN mkdir /build/src/main/java/master/sedemo/tasks
+RUN cp ./se-demo/src/main/java/master/sedemo/tasks/* /app/src/main/java/master/sedemo/tasks
+RUN git clone https://s80984:BoYhomK7Puabags2TsMY@gitlab.beuth-hochschule.de/s80984/testrepository
+##RUN mkdir /build/src/test/java/master/sedemo/tasks
+RUN cp testrepository/src/test/java/master/sedemo/tasks/Customer* /app/src/test/java/master/sedemo/tasks
+RUN mvn -v
+RUN mvn package
+EXPOSE 8080
+ADD ./target/masterthesis-1.8.11.jar /developments/
+ENTRYPOINT ["java","-jar","/developments/masterthesis-1.8.11.jar"]
