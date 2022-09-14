@@ -11,70 +11,70 @@ ff4j:
   
   features:
   
-    - uid: AwesomeFeature
-      enable: true
-      description: some desc
-      
-    - uid: first
-      enable: true
-      description: description
-      permissions: [USER]
-      custom-properties: 
-        - name: myLogLevel
-          type: org.ff4j.property.PropertyLogLevel
-          value: DEBUG
-          fixedValues: [ERROR, INFO, FATAL, TRACE, DEBUG, WARN]
-        - name: digitValue
-          type: org.ff4j.property.PropertyInt
-          value: 1
-          fixedValues: [0, 1, 2, 3]
-        - name: ppint
-          type: org.ff4j.property.PropertyInt
-          value: 12
-        - name: ppstring
-          #type: org.ff4j.property.PropertyString
-          value: hello
-        - name: ppdouble
-          #type: org.ff4j.property.PropertyDouble
-          value: 12.5
-        - name: ppListInt
-          #type: org.ff4j.property.PropertyString
-          value: 12,13,14
-        - name: ppboolean
-          #type: org.ff4j.property.PropertyBoolean
-          value: true
-          fixedValues: [false, true]
-        - name: regionIdentifier
-          type: org.ff4j.property.PropertyString
-          value: AMER
-          fixedValues: [SSSS, AMER, EAST]
-          
-    - uid: second
-      enable: false
-      description: description
-      groupName: GRP0
-      permissions: [USER]
-      
-    - uid: third
-      enable: false
-      groupName: GRP1
-      permissions: [ADMINISTRATOR, BETA-TESTER]
-      flipstrategy: 
-        class: org.ff4j.strategy.el.ExpressionFlipStrategy
-        param: 
-          - name: expression
-            value: third | second
-            
-    - uid: forth
-      enable: true
-      description: description
-      groupName: GRP1
-      permissions: [ADMINISTRATOR, BETA-TESTER]
-      flipstrategy: 
-        class: org.ff4j.strategy.el.ExpressionFlipStrategy
-        param: 
-          - name: expression
-            value: third | second
+#    - uid: AwesomeFeature
+#      enable: true
+#      description: some desc
+#
+#    - uid: first
+#      enable: true
+#      description: description
+#      permissions: [USER]
+#      custom-properties:
+#        - name: myLogLevel
+#          type: org.ff4j.property.PropertyLogLevel
+#          value: DEBUG
+#          fixedValues: [ERROR, INFO, FATAL, TRACE, DEBUG, WARN]
+#        - name: digitValue
+#          type: org.ff4j.property.PropertyInt
+#          value: 1
+#          fixedValues: [0, 1, 2, 3]
+#        - name: ppint
+#          type: org.ff4j.property.PropertyInt
+#          value: 12
+#        - name: ppstring
+#          #type: org.ff4j.property.PropertyString
+#          value: hello
+#        - name: ppdouble
+#          #type: org.ff4j.property.PropertyDouble
+#          value: 12.5
+#        - name: ppListInt
+#          #type: org.ff4j.property.PropertyString
+#          value: 12,13,14
+#        - name: ppboolean
+#          #type: org.ff4j.property.PropertyBoolean
+#          value: true
+#          fixedValues: [false, true]
+#        - name: regionIdentifier
+#          type: org.ff4j.property.PropertyString
+#          value: AMER
+#          fixedValues: [SSSS, AMER, EAST]
+#
+#    - uid: second
+#      enable: false
+#      description: description
+#      groupName: GRP0
+#      permissions: [USER]
+#
+#    - uid: third
+#      enable: false
+#      groupName: GRP1
+#      permissions: [ADMINISTRATOR, BETA-TESTER]
+#      flipstrategy:
+#        class: org.ff4j.strategy.el.ExpressionFlipStrategy
+#        param:
+#          - name: expression
+#            value: third | second
+#
+#    - uid: forth
+#      enable: true
+#      description: description
+#      groupName: GRP1
+#      permissions: [ADMINISTRATOR, BETA-TESTER]
+#      flipstrategy:
+#        class: org.ff4j.strategy.el.ExpressionFlipStrategy
+#        param:
+#          - name: expression
+#            value: third | second
 
   # -----------------------------
   # Bloc Properties

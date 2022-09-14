@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const TEST_REST_API_URL = 'http://localhost:8080/test/all'
-const EXECUTE_TEST_REST_API_URL_LEVEL1 = 'http://localhost:8080/test/executeTestLevel1'
-const EXECUTE_TEST_REST_API_URL_LEVEL2 = 'http://localhost:8080/test/executeTestLevel2'
-
+const TEST_REST_API_URL = 'http://localhost:8080/test/all';
+const CHECK_FEATURES_URL = 'http://localhost:8080/test/checkForFeatures';
+const SHOW_RESULTS = "http://localhost:8080/test/showResults";
+const EXECUTE_TESTS = "http://localhost:8080/test/executeTests";
 
 class TestService {
 
@@ -11,12 +11,23 @@ class TestService {
         return axios.get(TEST_REST_API_URL)
     }
 
-    executeTestLevel1() {
-        return axios.post(EXECUTE_TEST_REST_API_URL_LEVEL1);
+    checkForFeatures(){
+        return axios.get(CHECK_FEATURES_URL);
     }
 
-    executeTestLevel2() {
-        return axios.post(EXECUTE_TEST_REST_API_URL_LEVEL2);
+    getFeatureCheck(uid){
+
+        const id = uid;
+
+        return axios.get('http://localhost:8080/test/featureCheck/uid?=${id}');
+    }
+
+    showResults(){
+        return axios.get(SHOW_RESULTS);
+    }
+
+    executeTests(){
+        return axios.post(EXECUTE_TESTS);
     }
     
 }

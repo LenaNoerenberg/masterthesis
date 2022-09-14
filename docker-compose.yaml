@@ -10,6 +10,12 @@ services:
     build:
       context: . # Use an image built from the specified dockerfile in the `polling-app-server` directory.
       dockerfile: Dockerfile
+      args:
+        - GITHUB_USERNAME=$GITHUB_USERNAME
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - GITLAB_USERNAME=$GITLAB_USERNAME
+        - GITLAB_TOKEN=$GITLAB_TOKEN
+
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
@@ -23,7 +29,7 @@ services:
       - backend
       - frontend
 
-  # Frontend Service 
+  # Frontend Service
   app-client:
     build:
       context: ./react-frontend # Use an image built from the specified dockerfile in the `polling-app-client` directory.
@@ -61,4 +67,4 @@ volumes:
 # Networks to be created to facilitate communication between containers
 networks:
   backend:
-  frontend:    
+  frontend:

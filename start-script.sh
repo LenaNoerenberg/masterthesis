@@ -1,9 +1,6 @@
 #!/bin/bash
 # bash command to open a new terminal
-gnome-terminal
-exec mvn spring-boot:run
-
-# bash command to open a new terminal
-gnome-terminal
-cd webapp
-exec npm start
+echo "hallo"
+ls -l /bin/bash
+bash -c ping -c 3 google.com
+mvn -Dtest=Customer_200_SetIdTest test

@@ -1,8 +1,10 @@
 package master.sedemo.controller;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.ff4j.FF4j;
+import org.ff4j.property.PropertyString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,50 +12,71 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Having a home page for our app allowing.
- *
- * - To provide a link to web console
- * - To provide a link to REST API
- * - To check for features
+ * Erstellt eine Simple Seite von welcher aus
+ * - ein Link zur Web Console
+ * - ein Link zur REST API
  */
-@Controller
+
+@RestController
 @RequestMapping("/")
 public class HomeController {
 
-    /** Some logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-
-    /** Constants from the dataset. */
-    private static final String FEATURE_AWESOME = "AwesomeFeature";
-    private static final String FEATURE1      = "first";
-    private static final String PROPERTY1     = "a";
+    private static final String FEATURE_SHOW_WEBCONSOLE = "showWebConsoleURL";
+    private static final String FEATURE_SHOW_REST_API   = "showRestApiURL";
+    private static final String FEATURE_SHOW_USERNAME   = "showUserName";
+    private static final String PROPERTY_USERNAME       = "username";
 
     @Autowired
     public FF4j ff4j;
 
-    @GetMapping("/")
-    public String home(HttpServletRequest req, Model model) {
-
-        // if not exist, create and evaluate
-        model.addAttribute("featureAwesomeFlag", ff4j.check(FEATURE_AWESOME));
-
-        // Have a behaviour based on the state of a feature
-        if (ff4j.check(FEATURE1)) {
-            LOGGER.info(FEATURE1 + " should be activated");
+    @PostConstruct
+    public void populateDummyFeatureForMySample() {
+        if (!ff4j.exist(FEATURE_SHOW_WEBCONSOLE)) {
+            ff4j.createFeature(FEATURE_SHOW_WEBCONSOLE, true);
         }
-
-        // You could make available Feature in the UI as an Object
-        if (ff4j.getFeatureStore().exist(FEATURE_AWESOME)) {
-            model.addAttribute("ff4j_features_Awesomefeature", ff4j.getFeature(FEATURE_AWESOME));
+        if (!ff4j.exist(FEATURE_SHOW_REST_API)) {
+            ff4j.createFeature(FEATURE_SHOW_REST_API, true);
         }
-
-        // You could make available Feature in the UI as an Object
-        if (ff4j.getPropertiesStore().existProperty(PROPERTY1)) {
-            model.addAttribute("ff4j_properties_a", ff4j.getProperty(PROPERTY1));
+        if (!ff4j.exist(FEATURE_SHOW_USERNAME)) {
+            ff4j.createFeature(FEATURE_SHOW_USERNAME, true);
         }
-
-        return "index";
+        if (!ff4j.getPropertiesStore().existProperty(PROPERTY_USERNAME)) {
+            ff4j.createProperty(new PropertyString(PROPERTY_USERNAME, "cedrick"));
+        }
+        LOGGER.info(" + Features and properties have been created for the sample.");
+    }
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
+    public String get() {
+        LOGGER.info(" + Rendering home page...");
+        StringBuilder htmlPage = new StringBuilder("<html><body><ul>");
+        htmlPage.append("<h2>This is home page.</h2>");
+        htmlPage.append("<p>Displaying the links below is driven by features in FF4j."
+                + "If you disable the feature "
+                + "the link will disapear (but the servlet will still response, "
+                + "this is just a trick to illustrate "
+                + "response in the UI)</p>");
+        htmlPage.append("<p><b>List of resources for you :"
+                + "</b><br/><ul>");
+        if (ff4j.check(FEATURE_SHOW_WEBCONSOLE)) {
+            htmlPage.append("<li> To access the  To access the <b>REST API</b> "
+                    + "please go to <a href=\"./api/ff4j\" target=\"_blank\">ff4j-rest-api </a>");
+        }
+        if (ff4j.check(FEATURE_SHOW_USERNAME)) {
+            if (ff4j.getPropertiesStore().existProperty(PROPERTY_USERNAME)) {
+                htmlPage.append("<li> " + PROPERTY_USERNAME + " value is ");
+                htmlPage.append("<span style=\"color:blue;font-weight:bold\">");
+                htmlPage.append(ff4j.getPropertiesStore().readProperty(PROPERTY_USERNAME).asString());
+                htmlPage.append("</span>");
+            } else {
+                htmlPage.append("<li> " + PROPERTY_USERNAME + " does not exist.");
+            }
+        }
+        htmlPage.append("</ul></body></html>");
+        return htmlPage.toString();
     }
 }

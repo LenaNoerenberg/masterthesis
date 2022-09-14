@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ff4j xmlns="http://www.ff4j.org/schema/ff4j"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.4.0.xsd">
+    <features>
+        <feature uid="Customer_100_ConstructorTest" enable="true" description="Customer_100_ConstructorTest">
+        </feature>
+        <feature uid="Customer_200_SetIdTest" enable="true" description="Customer_200_SetIdTest">
+        </feature>
+        <feature uid="Customer_300_SetNameTest" enable="true" description="Customer_300_SetNameTest">
+        </feature>
+        <feature uid="Customer_400_ContactsTest" enable="true" description="Customer_400_ContactsTest">
+        </feature>
+        <feature uid="Customer_500_SetNameExtendedTest" enable="true" description="Customer_500_SetNameExtendedTest">
+        </feature>
+        <feature uid="Article_100_ConstructorTest" enable="true" description="Article_100_ConstructorTest">
+        </feature>
+        <feature uid="Article_200_SetIdTest" enable="true" description="Article_200_SetIdTest">
+        </feature>
+        <feature uid="Article_300_DescriptionTest" enable="true" description="Article_300_DescriptionTest">
+        </feature>
+        <feature uid="Article_400_UnitPriceTest" enable="true" description="Article_400_UnitPriceTest">
+        </feature>
+        <feature uid="Article_500_CurrencyTest" enable="true" description="Article_500_CurrencyTest">
+        </feature>
+        <feature uid="Article_600_TAXTest" enable="true" description="Article_600_TAXTest">
+        </feature>
+
+        <!--        <feature uid="Order_100_ConstructorTest" enable="true" description="Order_100_ConstructorTest">-->
+        <!--        </feature>-->
+        <!--        <feature uid="Order_200_SetIdTest" enable="true" description="Order_200_SetIdTest">-->
+        <!--        </feature>-->
+        <!--        <feature uid="Order_300_CreationDateTest" enable="true" description="Order_300_CreationDateTest">-->
+        <!--        </feature>-->
+        <!--        <feature uid="Order_400_OrderItemsTest" enable="true" description="Order_400_OrderItemsTest">-->
+        <!--        </feature>-->
+    </features>
+</ff4j>

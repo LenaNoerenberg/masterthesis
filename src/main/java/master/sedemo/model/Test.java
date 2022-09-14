@@ -12,13 +12,19 @@ public class Test {
     private String name;
     private String description;
 
+    private String uid;
+
+    private boolean hasFeatureEnabled;
+
     public Test() {
 
     }
 
-    public Test(String name, String description) {
+    public Test(String name, String description, String uid, Boolean hasFeatureEnabled) {
         this.name = name;
         this.description = description;
+        this.uid = uid;
+        this.hasFeatureEnabled = hasFeatureEnabled;
     }
 
     public Long getId() {
@@ -32,6 +38,14 @@ public class Test {
     public String getDescription(){
         return description;
     }
+    public String getUid() {
+        return uid;
+    }
+
+    public Boolean getHasFeatureEnabled() {
+        return hasFeatureEnabled;
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -44,6 +58,11 @@ public class Test {
     public void setDescription(String description) {
         this.description = description;
     }
+//    public String setUid() {
+//        this.uid = uid;
+//    }
+    public void setHasFeatureEnabled(Boolean hasFeatureEnabled) { this.hasFeatureEnabled = hasFeatureEnabled; }
+
 
 }
 
