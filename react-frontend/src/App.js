@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import ListTestComponent from './components/ListTestComponent';
 import ReportComponent from './components/ReportComponent';
-import Navbar from './navigation/Navigation';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
 /**

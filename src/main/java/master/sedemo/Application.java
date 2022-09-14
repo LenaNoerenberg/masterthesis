@@ -36,8 +36,6 @@ public class Application implements CommandLineRunner {
     }
 
     @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
     private TestRepository testRepository;
 
     @Autowired

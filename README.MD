@@ -1,27 +1,58 @@
-# FF4j Sample Series
+# Masterarbeit
 
-This sample uses the `spring-boot-starter` and define some extra beans to:
-- Create a `ff4j` bean full in-memory
-- Create the web console bean and expose it to proper url `/ff4j-web-console`
-- Create REST API expose it to proper url `/api/ff4j`
+Dies ist der Prototyp der im Rahmen der Masterarbeit:
 
-To run the app :
+#### Optimierung von automatisierten Container Deployments für DevOps Test-Sets durch Einsatz von Feature Toggles
+
+Dieses Projekt ist abhängig von zwei im Rahmen dieser Arbeit erzeugten Repositorys:
+
+1. Test-Repository: hier liegen die JUnit Tests, mit denen in der Applikation getestet werden soll
+
+   https://gitlab.beuth-hochschule.de/s80984/testrepository
+
+2. Studierenden-Repository: dies Simuliert die Abgabe von Programmierübungsaufgaben.
+
+   https://github.com/s80984/se-demo
+
+#### Starten der Applikation
+
+Die Backend-Applikation kann mit folgendem Befehl gestartet werden:
+
 ```
 mvn spring-boot:run
 ```
 
-The application is now running on `http://localhost:8080`
+Anschließend sollte das Feature Toggle Management unter folgender URL abrufbar sein `http://localhost:8080`.
 
+Die Frontend-Applikation wird im Verzeichnis  `/react-frontend` mit folgendem Befehl gestartet werden:
 
-This sample could also be run as a demo as such it can be deployed as a docker image
-```yaml
-mvn clean package dockerfile:build
+```
+npm start
 ```
 
-Once the image is built you can run it with
+Anschließend sollte die Applikation unter folgender URL abrufbar sein `http://localhost:3000`.
+
+
+
+#### Starten des Prototyps
+
+Der Prototyp braucht eine .env Konfigurationsdatei in denen die Git Tokens und die Git Usernamen gespeichert werden.
+
 ```
-docker run -p 8080:8080 ff4j/ff4j-sample-springboot2x:1.8.5
+GITHUB_USERNAME=...
+GITHUB_TOKEN=...
+GITLAB_USERNAME=...
+GITLAB_TOKEN=...
+GITHUB_URL=...
 ```
 
 
-Cheers.
+
+Der Prototyp wird mit folgendem dem Befehl gestartet:
+
+```
+docker-compose up --build
+```
+
+
+Anschließend sollte sie unter folgender URL abrufbar sein `http://localhost:3000`.
