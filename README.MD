@@ -4,7 +4,9 @@ Dies ist der Prototyp der im Rahmen der Masterarbeit:
 
 #### Optimierung von automatisierten Container Deployments für DevOps Test-Sets durch Einsatz von Feature Toggles
 
-Dieses Projekt ist abhängig von zwei im Rahmen dieser Arbeit erzeugten Repositorys:
+Dieses Projekt zugänglich über: https://github.com/LenaNoerenberg/masterthesis
+
+Es ist abhängig von zwei im Rahmen dieser Arbeit erzeugten Repositorys:
 
 1. Test-Repository: hier liegen die JUnit Tests, mit denen in der Applikation getestet werden soll
 
